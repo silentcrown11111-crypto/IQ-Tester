@@ -1,0 +1,286 @@
+/* 
+  Custom CSS for Nexus IQ 
+  Premium Theme: Midnight Blue, Slate Grey, Gold Accents
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Sans+Arabic:wght@400;600;700&display=swap');
+
+:root {
+  --primary-gold: #f59e0b;
+  --gold-glow: rgba(245, 158, 11, 0.5);
+  --bg-midnight: #0f172a;
+  --bg-darker: #020617;
+  --slate-grey: #475569;
+  --card-bg: rgba(15, 23, 42, 0.6);
+  --card-border: rgba(71, 85, 105, 0.4);
+}
+
+body {
+  background-color: var(--bg-darker);
+  background-image:
+    radial-gradient(circle at 15% 50%, rgba(30, 41, 59, 0.5), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(71, 85, 105, 0.2), transparent 25%);
+  color: #f8fafc;
+  scroll-behavior: smooth;
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+html[dir="rtl"][lang="ur"] body {
+  font-family: 'Noto Nastaliq Urdu', serif;
+  line-height: 2;
+  /* Nastaliq requires larger line-height */
+}
+
+html[dir="rtl"][lang="ar"] body {
+  font-family: 'Noto Sans Arabic', sans-serif;
+}
+
+/* Glassmorphism Utilities */
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.border-glow {
+  position: relative;
+}
+
+.border-glow::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(45deg, var(--primary-gold), transparent, var(--slate-grey), transparent);
+  background-size: 200% 200%;
+  animation: borderRotate 4s linear infinite;
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0.4;
+}
+
+@keyframes borderRotate {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.glow-text {
+  filter: drop-shadow(0 0 10px var(--gold-glow));
+}
+
+/* Premium Glow utilities */
+.glow-gold {
+  text-shadow: 0 0 10px rgba(245, 158, 11, 0.5), 0 0 20px rgba(245, 158, 11, 0.3);
+}
+
+.glow-slate {
+  text-shadow: 0 0 10px rgba(100, 116, 139, 0.5), 0 0 20px rgba(100, 116, 139, 0.3);
+}
+
+/* Section Transitions */
+.view-section {
+  display: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.view-section.active {
+  display: block;
+}
+
+.view-section.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom Animations */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 15s infinite alternate ease-in-out;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.float-animation {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Options Buttons Styling */
+.option-btn {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  padding: 1rem 1.5rem;
+  text-align: left;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.option-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(71, 85, 105, 0.1));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.option-btn:hover {
+  border-color: rgba(245, 158, 11, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.option-btn:hover::before {
+  opacity: 1;
+}
+
+.option-btn.selected {
+  border-color: var(--primary-gold);
+  background: rgba(245, 158, 11, 0.05);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+}
+
+.option-btn.correct {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+}
+
+.option-btn.incorrect {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+}
+
+.option-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: bold;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+}
+
+.option-btn:hover .option-letter {
+  background: var(--primary-gold);
+  color: #000;
+}
+
+.option-btn.selected .option-letter {
+  background: var(--primary-gold);
+  color: #000;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+}
+
+.option-btn.correct .option-letter {
+  background: #10b981;
+  color: #fff;
+}
+
+.option-btn.incorrect .option-letter {
+  background: #ef4444;
+  color: #fff;
+}
+
+/* Timer SVG Circle animation */
+.linear {
+  transition-timing-function: linear;
+}
+
+/* Question Enter/Exit animations */
+.question-enter-active,
+.question-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.question-enter-from {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.question-leave-to {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 243, 255, 0.3);
+}
